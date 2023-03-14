@@ -9,13 +9,13 @@
 
 ## Introduction
 
-    When we use microcontrollers or embedded systems, CLPs, FPGA, Arduino etc.... using few memory or processing power, normally 
-    we face the memory and processing management problem. Many applications request reading and writting of boolean sensors and 
-    actuators, ex: LEDs, buttons, cilinders, lamps, valves or even the system state monitorization using flags, that are basically 
-    bits: on, off, up, down....
-  
-    But this type of system, normally operates with C ANSI language, PIC microcontrollers for example. And the basic type in the language is the 
-  CHAR TYPE. The char type contais 1 byte = 8 bits. I can use 1 char to each variable of controll in my program, but let´s see the example:
+    When we use microcontrollers or embedded systems, CLPs, FPGA, Arduino etc... using few memory or processing power,
+    normally we face the memory and processing management problem. Many applications request reading and writting of 
+    boolean sensors and actuators, ex: LEDs, buttons, cilinders, lamps, valves or even the system state monitorization 
+    using flags, that are basically bits: on, off, up, down...
+  But this type of system, normally operates with C ANSI language, PIC microcontrollers for example. And the basic type 
+  in the language is the CHAR TYPE. The char type contais 1 byte = 8 bits. I can use 1 char to each variable of controll 
+  in my program, but let´s see the example:
   
    int main(void)
     {
