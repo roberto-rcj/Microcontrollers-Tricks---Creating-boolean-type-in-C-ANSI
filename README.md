@@ -41,7 +41,7 @@ let´s see the memory space of the previous code:
 As you can see, we use exactly 1 BIT, but we allocate 8 bits, so for the example we are allocating 6 variables x 8 bits = 48 bits, but using only 6 bits...
 in other words, we are reaching an efficiency of 6/48 = 0,125 = 12,5% in memory management, that is TERRIBLE!
 
-## A light in the end of the dark tunnel
+## Pseudo Variables & Bit by Bit Selection
 
 C language is very powerfull. One of the "lost resources" from the language is the hability to select exactly one bit or a group of bits inside one variable of 1 byte or more. The syntax is described bellow:
 
@@ -53,6 +53,26 @@ C language is very powerfull. One of the "lost resources" from the language is t
   .
   .
   ```
-    
+  
+  in this syntax, the undefined type UNSIGNED is used as a standard declaration. After, we describe the name of the variable (varA, varB, varC....) and with the syntax of ':' indicates that we will select some bits, and this number is described after the ':'.
+  
+  ```
+  unsigned varA:1 -> varA is a pseudo variable, that will refer to 1 bit
+  unsigned varB:3 -> varA is a pseudo variable, that will refer to 3 bits
+  unsigned varC:8 -> varA is a pseudo variable, that will refer to 8 bits
+  ```
+in the truth, those variables are pseudo, because they don´t exist...yet! To allocate memory we use other powerfull resource of the language... STRUCTS & UNIONS!
 
+## Structs and Unions
+When we declare a struct we are creating a group of variables that are part of the same type, or in other words, we prepare a specific quantity of memory to be allocated. But, I can use the pseudo variables inside the struct to divide my variables, let´s see:
+
+  ```
+  typedef struct
+  {
+    unsigned varA:1
+    unsigned varB:2
+    unsigned varC:5
+  }pseudoTypes
+  ```
+pseudoTypes is the name of my new type. As you can see, I created 3 pseudo types that occupies 8 bits (1+2+5) = 1 byte, and it is intentional!
 
