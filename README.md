@@ -197,7 +197,7 @@ Using defines in my code, I can turn it more elegant, but I need to separate my 
   #define button1_state    object.Boolean.bit0
   #define button2_state    object.Boolean.bit1
   #define LED1_state       object.Boolean.bit2
-  #define LED1_state       object.Boolean.bit3
+  #define LED2_state       object.Boolean.bit3
   #define system1_state    object.Boolean.bit4
   #define system2_state    object.Boolean.bit5
  
