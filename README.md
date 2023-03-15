@@ -69,10 +69,10 @@ When we declare a struct we are creating a group of variables that are part of t
   ```
   typedef struct
   {
-    unsigned varA:1
-    unsigned varB:2
-    unsigned varC:5
-  }pseudoTypes
+    unsigned varA:1;
+    unsigned varB:2;
+    unsigned varC:5;
+  }pseudoTypes;
   ```
 pseudoTypes is the name of my new type. As you can see, I created 3 pseudo types that occupies 8 bits (1+2+5) = 1 byte, and it is intentional!
 
@@ -85,7 +85,7 @@ And in C languagem we have another resource that shares allocated memory spaces.
   {
     char          auxChar;
     pseudoTypes   bitAcess;
-  }newType
+  }newType;
   ```
   
 Let´s understand it!
@@ -94,10 +94,10 @@ Unions shares the memory space between their variables. An struct adds the space
 ```
   typedef struct
   {
-    unsigned varA:1
-    unsigned varB:2
-    unsigned varC:5
-  }pseudoTypes
+    unsigned varA:1;
+    unsigned varB:2;
+    unsigned varC:5;
+  }pseudoTypes;
   
   varA + varB + varC = 1 + 2 + 5 = 8 bits = 1 byte
 ```
@@ -111,7 +111,7 @@ So, I created the variable bitAcess, that is a special type pseudoTypes. Let´s 
   {
     char          auxChar   =       _ _ _ _ _   _ _    _              (8 bits)
     pseudoTypes   bitAcess  =       varC     | varB | varA            (5 + 2 + 1 = 8 bits)
-  }newType
+  }newType;
   ```
 
 ## Acessing the Bits
@@ -141,21 +141,21 @@ As seen before, in the truth I need to allocate at least 1 byte of memory, but n
 ```
   typedef struct
   {
-    unsigned bit0:1
-    unsigned bit1:1
-    unsigned bit2:1
-    unsigned bit3:1
-    unsigned bit4:1
-    unsigned bit5:1
-    unsigned bit6:1
-    unsigned bit7:1
-  } bitAcess
+    unsigned bit0:1;
+    unsigned bit1:1;
+    unsigned bit2:1;
+    unsigned bit3:1;
+    unsigned bit4:1;
+    unsigned bit5:1;
+    unsigned bit6:1;
+    unsigned bit7:1;
+  } bitAcess;
   
   typedef union
   {
     char auxChar;
     bitAcess bitPosition;
-  } fakeBoolean
+  } fakeBoolean;
   
   int main(void)
   {
@@ -177,21 +177,21 @@ Using defines in my code, I can turn it more elegant, but I need to separate my 
         
   typedef struct
   {
-    unsigned bit0:1
-    unsigned bit1:1
-    unsigned bit2:1
-    unsigned bit3:1
-    unsigned bit4:1
-    unsigned bit5:1
-    unsigned bit6:1
-    unsigned bit7:1
-  } bitAcess
+    unsigned bit0:1;
+    unsigned bit1:1;
+    unsigned bit2:1;
+    unsigned bit3:1;
+    unsigned bit4:1;
+    unsigned bit5:1;
+    unsigned bit6:1;
+    unsigned bit7:1;
+  } bitAcess;
   
   typedef union
   {
     char auxChar;
     bitAcess Boolean;
-  } fakeBoolean
+  } fakeBoolean;
  
  //object is the name of the variable declared in the main.C
   #define button1_state    object.Boolean.bit0
@@ -205,7 +205,9 @@ Using defines in my code, I can turn it more elegant, but I need to separate my 
 ```
 ```
 //C file
- #include main.h
+ #include<stdio.h>
+ #include<stdlib.h>
+ #include "main.h"
  
  int main(void)
  {
@@ -221,6 +223,11 @@ Using defines in my code, I can turn it more elegant, but I need to separate my 
  LED1_state = 1;
  
  //both writes are the same!
+ //printing the values on the prompt
+ printf("the value of LED1 is %d", LED1_state);
+ 
+ //cheking the size
+ printf("%d",sizeof(LED1_state));
  }
 ```
 As you can see, now, I have allocated 1 byte in my memory (8 bits) but I can controll individually each bit, so, using the first real example, now I have 6 objects using 1 bit each one, in a total o 8 bits allocated, so I have an efficiency of 6/8 = 75% of memory allocation !
