@@ -76,3 +76,57 @@ When we declare a struct we are creating a group of variables that are part of t
   ```
 pseudoTypes is the name of my new type. As you can see, I created 3 pseudo types that occupies 8 bits (1+2+5) = 1 byte, and it is intentional!
 
+This struct in the true will prepare my system to allocate an memory space of 1 bit, 2 bits or 5 bits, according to my pseudo variable, BUT, I have yet a pseudo variable (or pseudo type). I need to link them to a real type, and I will choose the char type (can be int, float etc... but char is easier for my explanation).
+
+And in C languagem we have another resource that shares allocated memory spaces.... UNIONS! This is the secret! linking the space memory between the pseudo type and a real type, I can allocate real space using the properties of bit acessing. let´s see:
+
+ ```
+  typedef union
+  {
+    char          auxChar;
+    pseudoTypes   bitAcess;
+  }newType
+  ```
+  
+Let´s understand it!
+Unions shares the memory space between their variables. An struct adds the space. So, in the first step I added bits to create the same space as a char type:
+
+```
+  typedef struct
+  {
+    unsigned varA:1
+    unsigned varB:2
+    unsigned varC:5
+  }pseudoTypes
+  
+  varA + varB + varC = 1 + 2 + 5 = 8 bits = 1 byte
+```
+but how this type of declaration dont create a variable but prepares the system to stores and select the data, I need a second resource that helps me to allocate the real memory space so I used an UNION. This union is special because WE NEED SELECT AN TYPE THAT HAS THE SAME MEMORY SPACE OF THE PSEUDO TYPES. So, if my pseudo types in the total, results in 8 bits, I need a type that occupies 8 bits, or a CHAR.
+
+Declaring a char type in my union, I define the whole memory space shared between the elements (8 bits). This variable char (charAux) won´t be used more, but now I have a memory link with my next declaration, the type pseudoTypes, that contains the exactly memory space allocated, but distributed as my manner between the bits!
+So, I created the variable bitAcess, that is a special type pseudoTypes. Let´s see the draw:
+
+  ```
+  typedef union
+  {
+    char          auxChar   =       _ _ _ _ _   _ _    _              (8 bits)
+    pseudoTypes   bitAcess  =       varC     | varB | varA            (5 + 2 + 1 = 8 bits)
+  }newType
+  ```
+
+## Acessing the Bits
+After this process, I call my specific bit numbers using the C natural sintax for structs, calling the types:
+
+```
+//declare a new char variable using the new type
+newType testChar = 0;
+
+//call the specific bits from the variable
+newType.bitAcess.varA = 1;  //1 = 0x01 = 1b
+newtype.bitAcess.varB = 2;  //2 = 0x02 = 10b
+newtype.bitAcess.varC = 7;  //7 = 0x07 = 111b
+```
+
+
+
+
