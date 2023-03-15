@@ -227,6 +227,6 @@ As you can see, now, I have allocated 1 byte in my memory (8 bits) but I can con
 
 ## The End
 
-
+You can improve this skills, applying to 2 bytes, 4bytes or more variables. You don´t need to use all bits, but keep in mind, for each new variable you will allocate at least 8 bits, so afford them very well.
 
 
