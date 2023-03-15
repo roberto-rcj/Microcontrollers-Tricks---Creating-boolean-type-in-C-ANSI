@@ -2,7 +2,7 @@
 ## TIP NUMBER 1 - boolean type to save memory space, processing and make elegant codes
 
 ### Created by: Roberto Campos dos Reis Junior
-### Date: 14/03/1998
+### Date: 14/03/2023
 ### License and Rights: Free for use
 
 
@@ -126,7 +126,14 @@ newType.bitAcess.varA = 1;  //1 = 0x01 = 1b
 newtype.bitAcess.varB = 2;  //2 = 0x02 = 10b
 newtype.bitAcess.varC = 7;  //7 = 0x07 = 111b
 ```
+after this, if you print the binary state, you will see:
 
+```
+testChar = 00111101 = 00111  10   1
+//                    varC  varB varA
+//or 00111101 = 61;
+```
+As you can see, we created a new type, with the memory space of a char, but I can acess the first 5 bits, the 2 bits in the middle and the 1 last bit. Now I have total controll of my variable O.o
 
 
 
