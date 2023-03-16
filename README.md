@@ -43,7 +43,7 @@ in other words, we are reaching an efficiency of 6/48 = 0,125 = 12,5% in memory 
 
 ## Pseudo Variables & Bit by Bit Selection
 
-C language is very powerfull. One of the "lost resources" from the language is the hability to select exactly one bit or a group of bits inside one variable of 1 byte or more. The syntax is described bellow:
+C language is very powerful. One of the "lost resources" from the language is the hability to select exactly one bit or a group of bits inside one variable of 1 byte or more. The syntax is described bellow:
 
   ```
   unsigned varA:1
