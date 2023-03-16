@@ -226,14 +226,34 @@ Using defines in my code, I can turn it more elegant, but I need to separate my 
  //printing the values on the prompt
  printf("the value of LED1 is %d", LED1_state);
  
- //cheking the size
- printf("%d",sizeof(LED1_state));
  }
 ```
 As you can see, now, I have allocated 1 byte in my memory (8 bits) but I can controll individually each bit, so, using the first real example, now I have 6 objects using 1 bit each one, in a total o 8 bits allocated, so I have an efficiency of 6/8 = 75% of memory allocation !
 
-## The End
+## The End... or not
 
-You can improve this skills, applying to 2 bytes, 4bytes or more variables. You don´t need to use all bits, but keep in mind, for each new variable you will allocate at least 8 bits, so afford them very well.
+In a first look, the program really appears correct, and it is, but we have a little trouble. Structs in C need a space in the memory, so if you print the size of the object variable, you well see:
+
+```
+.
+.
+.
+printf("%d", sizeof(object));
+
+>> 4
+```
+the prompt will return 4 bytes, not only 1 as expected :(
+
+but if life gives you lemons, take it and make a juice :)
+if I have 4 bytes reserved, so I can use this whole 32 bits one by one. To make the programming correct, you can turn your auxChar into a vector of 4 bytes, but is not necessary. In the example code, you will see a declaration going from bit0 to bit31 (32 bits). You will be able to declare variables from "object.Boolean.bit0" to "object.Boolean.bit31", so unfortunatelly we need allocate more memory but happily we can use all those bits one by one.
+
+## Pay atention
+if you change the auxiliar char vector "auxChar[4]" to "auxChar[5]", the union will request more space enough to the whole process, so in the truth you will allocate 8 bytes, so the correct and elegant way is change the variable to "auxChar[8]". As I said, "auxChar[5]" is not a problem, because the compilers corrects it, allocating more memory to the structure, but is important make it clear and let evident the number of real bytes allocated by the program!
+
+if you print the size of "object", with auxChar[5], auxChar[6], auxChar[7], or auxChar[8], the prompt will show 8, as the same logic applied to  auxChar[1], auxChar[2], auxChar[3], or auxChar[4], that had shown 1 byte.
+
+## Finishing
+
+You can use and create new tipes, but keep in mind the space allocated to otimize your program and memory allocation. Good luck!
 
 
