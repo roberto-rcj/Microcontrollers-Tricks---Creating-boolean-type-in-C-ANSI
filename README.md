@@ -1,5 +1,5 @@
 # Microcontrollers Tricks - Creating boolean type in C ANSI
-## TIP NUMBER 1 - boolean type to save memory space, processing and make elegant codes
+## TIP NUMBER 1 - boolean type to save memory space, processing and making elegant codes
 
 ### Created by: Roberto Campos dos Reis Junior
 ### Date: 14/03/2023
