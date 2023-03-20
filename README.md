@@ -28,7 +28,7 @@ But this type of system, normally operates with C ANSI language, PIC microcontro
     }
    ```
    
-this code is an example of declaration of variables that contain the states or informations about some sensor, actuator or state. As you can see,the two possibilities for those variables are: 1 or 0, on or off, true or false. But, when we declare a char type for this type of variable, in the true, we are allocating 1 BYTE = 8 bits, to store a information requested for only 1 BIT, or in other words... I´m using a variable able to store 8 real objects to store only one :(
+this code is an example of declaration of variables that contain the states or informations about some sensor, actuator or state. As you can see,there are two possibilities for those variables: 1 or 0, on or off, true or false. But, when we declare a char type for this type of variable, actually, we are allocating 1 BYTE = 8 bits, to store an information requested for only 1 BIT, or in other words... I´m using a variable able to store 8 real objects to store only one :(
 let´s see the memory space of the previous code:
 
   ```
@@ -38,12 +38,12 @@ let´s see the memory space of the previous code:
       .
       .
    ```
-As you can see, we use exactly 1 BIT, but we allocate 8 bits, so for the example we are allocating 6 variables x 8 bits = 48 bits, but using only 6 bits...
+As you can see, we use exactly 1 BIT, but we allocate 8 bits, so for this example we are allocating 6 variables x 8 bits = 48 bits, but using only 6 bits...
 in other words, we are reaching an efficiency of 6/48 = 0,125 = 12,5% in memory management, that is TERRIBLE!
 
 ## Pseudo Variables & Bit by Bit Selection
 
-C language is very powerful. One of the "lost resources" from the language is the hability to select exactly one bit or a group of bits inside one variable of 1 byte or more. The syntax is described bellow:
+C language is very powerful. One of the "lost resources" from the language is the ability to select exactly one bit or a group of bits inside one variable of 1 byte or more. The syntax is described bellow:
 
   ```
   unsigned varA:1
@@ -61,7 +61,7 @@ C language is very powerful. One of the "lost resources" from the language is th
   unsigned varB:3 -> varA is a pseudo variable, that will refer to 3 bits
   unsigned varC:8 -> varA is a pseudo variable, that will refer to 8 bits
   ```
-in the truth, those variables are pseudo, because they don´t exist...yet! To allocate memory we use other powerfull resource of the language... STRUCTS & UNIONS!
+in the truth, those variables are pseudo, because they don´t exist...yet! To allocate memory we use another powerful resources of the language... STRUCTS and UNIONS!
 
 ## Structs and Unions
 When we declare a struct we are creating a group of variables that are part of the same type, or in other words, we prepare a specific quantity of memory to be allocated. But, I can use the pseudo variables inside the struct to divide my variables, let´s see:
@@ -74,9 +74,9 @@ When we declare a struct we are creating a group of variables that are part of t
     unsigned varC:5;
   }pseudoTypes;
   ```
-pseudoTypes is the name of my new type. As you can see, I created 3 pseudo types that occupies 8 bits (1+2+5) = 1 byte, and it is intentional!
+pseudoTypes is the name of my new type. As you can see, I created 3 pseudo types that occupies 8 bits (1+2+5) = 1 byte, and this is intentional!
 
-This struct in the true will prepare my system to allocate an memory space of 1 bit, 2 bits or 5 bits, according to my pseudo variable, BUT, I have yet a pseudo variable (or pseudo type). I need to link them to a real type, and I will choose the char type (can be int, float etc... but char is easier for my explanation).
+This struct, actually, will prepare my system to allocate a memory space of 1 bit, 2 bits or 5 bits, according to my pseudo variable, BUT, I have yet a pseudo variable (or pseudo type). I need to link them to a real type, and I will choose the char type (can be int, float etc... but char is easier for my explanation).
 
 And in C languagem we have another resource that shares allocated memory spaces.... UNIONS! This is the secret! linking the space memory between the pseudo type and a real type, I can allocate real space using the properties of bit acessing. let´s see:
 
@@ -101,10 +101,10 @@ Unions shares the memory space between their variables. An struct adds the space
   
   varA + varB + varC = 1 + 2 + 5 = 8 bits = 1 byte
 ```
-but how this type of declaration dont create a variable but prepares the system to stores and select the data, I need a second resource that helps me to allocate the real memory space so I used an UNION. This union is special because WE NEED SELECT AN TYPE THAT HAS THE SAME MEMORY SPACE OF THE PSEUDO TYPES. So, if my pseudo types in the total, results in 8 bits, I need a type that occupies 8 bits, or a CHAR.
+but how this type of declaration doesn´t create a variable but prepares the system to stores and selects the data, I need a second resource that helps me to allocate the real memory space so I used an UNION. This union is special because WE NEED TO SELECT A TYPE THAT HAS THE SAME MEMORY SPACE OF THE PSEUDO TYPES. So, if my pseudo types in the total, results in 8 bits, I need a type that occupies 8 bits, or a CHAR.
 
 Declaring a char type in my union, I define the whole memory space shared between the elements (8 bits). This variable char (charAux) won´t be used more, but now I have a memory link with my next declaration, the type pseudoTypes, that contains the exactly memory space allocated, but distributed as my manner between the bits!
-So, I created the variable bitAcess, that is a special type pseudoTypes. Let´s see the draw:
+So, I´ve created the variable bitAcess, that is a special type pseudoTypes. Let´s see the draw:
 
   ```
   typedef union
@@ -133,10 +133,10 @@ testChar = 00111101 = 00111  10   1
 //                    varC  varB varA
 //or 00111101 = 61;
 ```
-As you can see, we created a new type, with the memory space of a char, but I can acess the first 5 bits, the 2 bits in the middle and the 1 last bit. Now I have total controll of my variable O.o
+As you can see, we´ve created a new type, with the memory space of a char, but I can acess the first 5 bits, the 2 bits in the middle and the 1 last bit. Now I have total controll of my variable!
 
 ## Boolean types in C (fake news)
-As seen before, in the truth I need to allocate at least 1 byte of memory, but now I´m able to manage bit by bit. By this way, I can create a new type to acess bit by bit, emulating a boolean type:
+As seen before, actually, I need to allocate at least 1 byte of memory, but now I´m able to manage bit by bit. By this way, I can create a new type to acess bit by bit, emulating a boolean type:
 
 ```
   typedef struct
@@ -168,7 +168,7 @@ As seen before, in the truth I need to allocate at least 1 byte of memory, but n
   }
 ```
 
-Using defines in my code, I can turn it more elegant, but I need to separate my code in a header file and in a C file. The header file will contain the struct, union and define declarations, and in my C code I will declare the variables in the new type, but I need to be wise and coordinate the declarations:
+Using defines in my code, I can make it more elegant, but I need to separate my code in a header file and in a C file. The header file will contain the struct, union and define declarations, and in my C code I will declare the variables in the new type, but I need to be wise and coordinate the declarations:
 
 ```
 //header file
